@@ -1,0 +1,6 @@
+/.idea
+/.gradle
+
+/app/build
+/base-library/build
+/mvvm-library/build
