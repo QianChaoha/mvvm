@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Description:
@@ -18,7 +16,6 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends FragmentActivity {
     public View mRootView;
     protected View mLayoutView;
-    protected Unbinder mUnBinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +25,6 @@ public abstract class BaseActivity extends FragmentActivity {
         mRootView = getWindow().getDecorView().getRootView();
         mLayoutView = View.inflate(this, getLayoutId(), null);
         setContentView(mLayoutView);
-        mUnBinder = ButterKnife.bind(this);
         initTitle();
         initView();
         initData();
@@ -53,9 +49,4 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void afterSuperCreate() {
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mUnBinder.unbind();
-    }
 }

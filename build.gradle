@@ -13,9 +13,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0-alpha13'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         classpath 'com.tencent.bugly:symtabfileuploader:latest.release'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:9.0.0'
     }
 }
 
