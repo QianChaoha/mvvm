@@ -12,7 +12,6 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -31,9 +30,9 @@ import io.reactivex.disposables.Disposable;
 public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends ViewDataBinding> extends AppCompatActivity {
 
     // ViewModel
-    protected VM viewModel;
+    protected VM mViewModel;
     // 布局view
-    protected SV bindingView;
+    protected SV mBindingView;
     private View errorView;
     private View loadingView;
     private ActivityBaseBinding mBaseBinding;
@@ -60,14 +59,14 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         //base布局
         mBaseBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_base, null, false);
         //子类传入layoutResID的布局
-        bindingView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);
+        mBindingView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);
 
         // content
 //        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        bindingView.getRoot().setLayoutParams(params);
+//        mBindingView.getRoot().setLayoutParams(params);
         //将子类布局加到base布局中的mContainer
         RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
-        mContainer.addView(bindingView.getRoot());
+        mContainer.addView(mBindingView.getRoot());
         getWindow().setContentView(mBaseBinding.getRoot());
 
         // 设置透明状态栏，兼容4.4
@@ -78,7 +77,7 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         showLoading();
 
         //setToolBar();
-        bindingView.getRoot().setVisibility(View.GONE);
+        mBindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
     }
 
@@ -98,7 +97,7 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
     private void initViewModel() {
         Class<VM> viewModelClass = ClassUtil.getViewModel(this);
         if (viewModelClass != null) {
-            this.viewModel = ViewModelProviders.of(this).get(viewModelClass);
+            this.mViewModel = ViewModelProviders.of(this).get(viewModelClass);
         }
     }
 
@@ -138,8 +137,8 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         if (!mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
-        if (bindingView.getRoot().getVisibility() != View.GONE) {
-            bindingView.getRoot().setVisibility(View.GONE);
+        if (mBindingView.getRoot().getVisibility() != View.GONE) {
+            mBindingView.getRoot().setVisibility(View.GONE);
         }
         if (errorView != null) {
             errorView.setVisibility(View.GONE);
@@ -157,8 +156,8 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         if (errorView != null) {
             errorView.setVisibility(View.GONE);
         }
-        if (bindingView.getRoot().getVisibility() != View.VISIBLE) {
-            bindingView.getRoot().setVisibility(View.VISIBLE);
+        if (mBindingView.getRoot().getVisibility() != View.VISIBLE) {
+            mBindingView.getRoot().setVisibility(View.VISIBLE);
         }
     }
 
@@ -184,8 +183,8 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         } else {
             errorView.setVisibility(View.VISIBLE);
         }
-        if (bindingView.getRoot().getVisibility() != View.GONE) {
-            bindingView.getRoot().setVisibility(View.GONE);
+        if (mBindingView.getRoot().getVisibility() != View.GONE) {
+            mBindingView.getRoot().setVisibility(View.GONE);
         }
     }
 
