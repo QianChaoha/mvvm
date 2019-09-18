@@ -4,3 +4,8 @@
 /app/build
 /base-library/build
 /mvvm-library/build
+/app/app.iml
+/base-library/base-library.iml
+/mvvm-library/mvvm-library.iml
+/app/*.iml
+/mvvm-library/*.iml
