@@ -5,6 +5,7 @@ import io.reactivex.Flowable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.POST;
 
 /**
@@ -13,5 +14,5 @@ import retrofit2.http.POST;
 
 public interface ProjectApi {
     @POST(HttpUrl.LOGIN)
-    Flowable<ResponseBody> login(@Body RequestBody info);   // 请求体味RequestBody 类型
+    Flowable<ResponseBody> login(@Field("username") String userName, @Field("password") String passWord);
 }

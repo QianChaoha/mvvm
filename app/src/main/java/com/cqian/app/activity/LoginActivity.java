@@ -37,13 +37,16 @@ public class LoginActivity extends BaseMvvmActivity<LoginViewModel, ActivityLogi
     }
 
     public void login(View view) {
-        if (TextUtils.isEmpty(mBindingView.etUserName.getText().toString())) {
+        String userName = mBindingView.etUserName.getText().toString();
+        String password = mBindingView.etPassword.getText().toString();
+        if (TextUtils.isEmpty(userName)) {
             ToastUtil.showToast(getApplication(), "请输入用户名");
             return;
         }
-        if (TextUtils.isEmpty(mBindingView.etPassword.getText().toString())) {
+        if (TextUtils.isEmpty(password)) {
             ToastUtil.showToast(getApplication(), "请输入密码");
             return;
         }
+        mViewModel.login(userName, password);
     }
 }

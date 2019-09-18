@@ -24,11 +24,11 @@ public class LoginViewModel extends BaseViewModel {
         super(application);
     }
 
-    public MutableLiveData<TokenBean> login() {
+    public MutableLiveData<TokenBean> login(String userName,String password) {
         final MutableLiveData<Boolean> data = new MutableLiveData<>();
 
 
-        return mLoginRepository.getToken();
+        return mLoginRepository.login(userName,password);
 //        HttpClient.Builder.getWanAndroidServer().login(mUsername.get(), mPassword.get())
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())

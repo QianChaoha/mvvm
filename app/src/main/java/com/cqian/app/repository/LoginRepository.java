@@ -34,30 +34,14 @@ public class LoginRepository {
         this.context = context.getApplicationContext();
     }
 
-    public MutableLiveData<TokenBean> getToken() {
+    public MutableLiveData<TokenBean> login(String userName,String passWord) {
 //        if (NetworkUtils.isConnected(context)) {
 //            return remoteProjectDataSource.queryProjects(page);
 //        } else {
 //            return localProjectDataSource.queryProjects(page);
 //        }
-//        ProjectApi projectApi = RetrofitFactory.getInstance().create(ProjectApi.class);
-//        JSONObject jsonObject = new JSONObject();
-//        try {
-//            jsonObject.put("phone", mEtUser.getText().toString());
-//            jsonObject.put("passwd", mEtPassword.getText().toString());
-//            // 国家简码 "CN"
-//            if (LanguageUtils.currentLaguageIsZh(mActivity)) {
-//                jsonObject.put("language", LanguageUtils.CN);
-//            } else {
-//                jsonObject.put("language", LanguageUtils.EN);
-//            }
-//
-//            // 国家代码 86
-//            jsonObject.put("dialing_code", mDataBean.ncode);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        projectApi.login()
+        ProjectApi projectApi = RetrofitFactory.getInstance().create(ProjectApi.class);
+        projectApi.login(userName,passWord);
         return remoteProjectDataSource.getToken();
     }
 
