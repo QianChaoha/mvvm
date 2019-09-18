@@ -1,4 +1,4 @@
-package com.cqian.app.repository.remote;
+package com.cqian.app.http;
 
 /**
  * Description:

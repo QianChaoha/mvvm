@@ -6,7 +6,7 @@ import android.view.View;
 import com.cqian.app.R;
 import com.cqian.app.databinding.ActivityLoginBinding;
 import com.cqian.app.viewmodel.LoginViewModel;
-import com.cqian.baselibrary.utils.ToastUtil;
+import com.cqian.baselibrary.utils.ToastUtils;
 import com.cqian.mvvm.base.BaseMvvmActivity;
 
 /**
@@ -40,11 +40,11 @@ public class LoginActivity extends BaseMvvmActivity<LoginViewModel, ActivityLogi
         String userName = mBindingView.etUserName.getText().toString();
         String password = mBindingView.etPassword.getText().toString();
         if (TextUtils.isEmpty(userName)) {
-            ToastUtil.showToast(getApplication(), "请输入用户名");
+            ToastUtils.showToast(getApplication(), "请输入用户名");
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            ToastUtil.showToast(getApplication(), "请输入密码");
+            ToastUtils.showToast(getApplication(), "请输入密码");
             return;
         }
         mViewModel.login(userName, password);

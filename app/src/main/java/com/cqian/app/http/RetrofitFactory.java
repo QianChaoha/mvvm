@@ -1,4 +1,6 @@
-package com.cqian.app.repository.remote;
+package com.cqian.app.http;
+
+import com.cqian.app.http.cache.EnhancedCacheInterceptor;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -34,12 +36,12 @@ public class RetrofitFactory {
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.SECONDS)
+                .addInterceptor(new EnhancedCacheInterceptor())
                 .addInterceptor(new Interceptor() {
 
                     @Override
 
                     public Response intercept(Chain chain) throws IOException {
-
                         Request request = chain.request()
                                 .newBuilder()
                                 .addHeader("device-type", "Mobile")
