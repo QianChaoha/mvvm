@@ -1,8 +1,5 @@
 package com.cqian.app.base;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import java.io.Serializable;
 
 /**
@@ -10,7 +7,7 @@ import java.io.Serializable;
  * 基础实体类
  */
 
-public class BaseBean implements Serializable, Subscriber {
+public class BaseBean implements Serializable{
 
 
     /**
@@ -26,23 +23,4 @@ public class BaseBean implements Serializable, Subscriber {
         return "0".equals(errcode);
     }
 
-    @Override
-    public void onSubscribe(Subscription s) {
-
-    }
-
-    @Override
-    public void onNext(Object o) {
-
-    }
-
-    @Override
-    public void onError(Throwable t) {
-
-    }
-
-    @Override
-    public void onComplete() {
-
-    }
 }

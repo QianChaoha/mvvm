@@ -8,7 +8,7 @@ import com.cqian.app.base.BaseBean;
  *
  * @author: cqian
  */
-public class LoginBean  {
+public class LoginBean  extends BaseBean{
 
     /**
      * data : {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTM2MTEzMDQ5fQ.7_9UrFVRDQEfxmHQfc7L8w1jwbcLHoZOGF7UkuUGfCA"}

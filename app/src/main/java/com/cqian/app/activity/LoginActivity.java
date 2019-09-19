@@ -1,9 +1,12 @@
 package com.cqian.app.activity;
 
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.cqian.app.R;
+import com.cqian.app.bean.LoginBean;
 import com.cqian.app.databinding.ActivityLoginBinding;
 import com.cqian.app.viewmodel.LoginViewModel;
 import com.cqian.baselibrary.utils.ToastUtils;
@@ -47,6 +50,11 @@ public class LoginActivity extends BaseMvvmActivity<LoginViewModel, ActivityLogi
             ToastUtils.showToast(getApplication(), "请输入密码");
             return;
         }
-        mViewModel.login(userName, password);
+        mViewModel.login(userName, password).observe(this, new Observer<LoginBean>() {
+            @Override
+            public void onChanged(@Nullable LoginBean loginBean) {
+
+            }
+        });
     }
 }

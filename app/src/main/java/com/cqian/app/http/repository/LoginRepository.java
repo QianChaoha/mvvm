@@ -14,20 +14,13 @@ import com.cqian.app.http.rx.RxSubscriber;
  */
 
 public class LoginRepository extends BaseRepository {
-    private static final LoginRepository instance = new LoginRepository();
+    private static final LoginRepository mInstance = new LoginRepository();
 
     private LoginRepository() {
     }
 
     public static LoginRepository getInstance() {
-        return instance;
-    }
-
-
-    private Context context;
-
-    public void init(Context context) {
-        this.context = context.getApplicationContext();
+        return mInstance;
     }
 
     public MutableLiveData<LoginBean> login(String userName, String passWord) {
@@ -43,11 +36,12 @@ public class LoginRepository extends BaseRepository {
 
                     @Override
                     public void onSuccess(LoginBean worksListVo) {
-                        //postData(EVENT_KEY_WORK_MORE, worksListVo);
+                        data.setValue(worksListVo);
                     }
 
                     @Override
-                    public void onFailure(String msg,int code) {
+                    public void onFailure(String msg, String code) {
+
                     }
                 }));
         return data;
