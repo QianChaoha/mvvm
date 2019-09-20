@@ -1,4 +1,4 @@
-package com.cqian.app.http.cache;
+package com.cqian.mvvm.http.cache;
 
 /**
  * Created on 2016/12/1.

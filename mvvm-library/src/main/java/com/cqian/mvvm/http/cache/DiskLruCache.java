@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.cqian.app.http.cache;
+package com.cqian.mvvm.http.cache;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;

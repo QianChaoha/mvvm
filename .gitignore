@@ -10,3 +10,5 @@
 /app/*.iml
 /mvvm-library/*.iml
 /app/*.iml
+/local.properties
+/mvvm.iml

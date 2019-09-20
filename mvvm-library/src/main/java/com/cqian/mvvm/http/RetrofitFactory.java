@@ -1,6 +1,6 @@
-package com.cqian.app.http;
+package com.cqian.mvvm.http;
 
-import com.cqian.app.http.cache.EnhancedCacheInterceptor;
+import com.cqian.mvvm.http.cache.EnhancedCacheInterceptor;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -18,11 +18,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitFactory {
     private static Retrofit retrofit;
-    private static String mToken;//token值
 
-    static {
+    public static void init(String baseUrl) {
         retrofit = new Retrofit.Builder()
-                .baseUrl(HttpUrl.SERVER_URL)
+                .baseUrl(baseUrl)
                 .client(getClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -45,7 +44,6 @@ public class RetrofitFactory {
                         Request request = chain.request()
                                 .newBuilder()
                                 .addHeader("device-type", "Mobile")
-                                .addHeader("Authorization", "Bearer " + getToken())
                                 .build();
 
                         return chain.proceed(request);
@@ -59,11 +57,4 @@ public class RetrofitFactory {
 
     }
 
-    public static String getToken() {
-        return mToken;
-    }
-
-    public static void setToken(String token) {
-        mToken = token;
-    }
 }

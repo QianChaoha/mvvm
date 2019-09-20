@@ -1,7 +1,7 @@
 package com.cqian.app.base;
 
 import com.cqian.app.http.ApiService;
-import com.cqian.app.http.RetrofitFactory;
+import com.cqian.mvvm.http.RetrofitFactory;
 
 
 /**

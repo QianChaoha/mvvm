@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 
 import com.cqian.mvvm.R;
 import com.cqian.mvvm.databinding.ActivityBaseBinding;
-import com.cqian.mvvm.utils.ClassUtil;
+import com.cqian.mvvm.utils.ClassUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -70,7 +70,7 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         getWindow().setContentView(mBaseBinding.getRoot());
 
         // 设置透明状态栏，兼容4.4
-        //StatusBarUtil.setColor(this, CommonUtil.getColor(R.color.colorTheme), 0);
+        //StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
         setLoading();
 
         // 加载动画,默认进入页面就开启动画
@@ -95,7 +95,7 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
      * 初始化ViewModel
      */
     private void initViewModel() {
-        Class<VM> viewModelClass = ClassUtil.getViewModel(this);
+        Class<VM> viewModelClass = ClassUtils.getViewModel(this);
         if (viewModelClass != null) {
             this.mViewModel = ViewModelProviders.of(this).get(viewModelClass);
         }

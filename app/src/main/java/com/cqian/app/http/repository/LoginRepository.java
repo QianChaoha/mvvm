@@ -1,12 +1,11 @@
 package com.cqian.app.http.repository;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 
 import com.cqian.app.base.BaseRepository;
 import com.cqian.app.bean.LoginBean;
-import com.cqian.app.http.rx.RxSchedulers;
-import com.cqian.app.http.rx.RxSubscriber;
+import com.cqian.mvvm.http.rx.RxSchedulers;
+import com.cqian.mvvm.http.rx.RxSubscriber;
 
 
 /**

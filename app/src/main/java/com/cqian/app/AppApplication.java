@@ -1,20 +1,13 @@
 package com.cqian.app;
 
-import android.app.Application;
-import android.content.Context;
+import com.cqian.app.http.HttpUrl;
+import com.cqian.mvvm.BaseApplication;
+import com.cqian.mvvm.http.RetrofitFactory;
 
-/**
- * Description:
- * Date: 2019/9/18
- *
- * @author: cqian
- */
-public class AppApplication extends Application {
-    public static Context mAppContext;
-
+public class AppApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppContext = this;
+        RetrofitFactory.init(HttpUrl.SERVER_URL);
     }
 }

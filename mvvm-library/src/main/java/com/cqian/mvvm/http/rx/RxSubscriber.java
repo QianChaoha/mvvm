@@ -1,8 +1,8 @@
-package com.cqian.app.http.rx;
+package com.cqian.mvvm.http.rx;
 
 
-import com.cqian.app.AppApplication;
-import com.cqian.app.http.ServerException;
+import com.cqian.mvvm.BaseApplication;
+import com.cqian.mvvm.http.ServerException;
 import com.cqian.baselibrary.utils.NetworkUtils;
 import com.cqian.baselibrary.utils.ToastUtils;
 import com.google.gson.JsonParseException;
@@ -30,10 +30,10 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
     protected void onStart() {
         super.onStart();
         showLoading();
-        if (!NetworkUtils.isNetworkOnline(AppApplication.mAppContext)) {
+        if (!NetworkUtils.isNetworkOnline(BaseApplication.mAppContext)) {
             onNoNetWork();
             cancel();
-            ToastUtils.showToast(AppApplication.mAppContext,"网络状态异常");
+            ToastUtils.showToast(BaseApplication.mAppContext,"网络状态异常");
             return;
         }
     }
@@ -77,7 +77,7 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
         } else {
             message = "未知错误";
         }
-        ToastUtils.showToast(AppApplication.mAppContext,message);
+        ToastUtils.showToast(BaseApplication.mAppContext,message);
         onFailure(message, code+"");
     }
 

@@ -1,9 +1,7 @@
 package com.cqian.mvvm.base;
 
-import android.app.Activity;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.graphics.drawable.AnimationDrawable;
@@ -19,7 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.cqian.baselibrary.base.BaseFragment;
 import com.cqian.mvvm.R;
-import com.cqian.mvvm.utils.ClassUtil;
+import com.cqian.mvvm.utils.ClassUtils;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -77,7 +75,7 @@ public abstract class BaseMvvmFragment<VM extends AndroidViewModel, SV extends V
      * 初始化ViewModel
      */
     private void initViewModel() {
-        Class<VM> viewModelClass = ClassUtil.getViewModel(this);
+        Class<VM> viewModelClass = ClassUtils.getViewModel(this);
         if (viewModelClass != null) {
             this.mViewModel = ViewModelProviders.of(this).get(viewModelClass);
         }

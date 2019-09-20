@@ -1,4 +1,4 @@
-package com.cqian.app.http.rx;
+package com.cqian.mvvm.http.rx;
 
 
 import org.reactivestreams.Publisher;
