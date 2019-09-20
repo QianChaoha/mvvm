@@ -3,8 +3,8 @@ package com.cqian.mvvm.http.cache;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.cqian.app.AppApplication;
 import com.cqian.baselibrary.utils.NetworkUtils;
+import com.cqian.mvvm.BaseApplication;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class EnhancedCall<T> {
 
             @Override
             public void onFailure(Call<T> call, Throwable t) {
-                if (!mUseCache || NetworkUtils.isNetworkOnline(AppApplication.mAppContext)) {
+                if (!mUseCache || NetworkUtils.isNetworkOnline(BaseApplication.mAppContext)) {
                     //不使用缓存 或者网络可用 的情况下直接回调onFailure
                     enhancedCallback.onFailure(call, t);
                     return;

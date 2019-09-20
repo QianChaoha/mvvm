@@ -1,7 +1,7 @@
 package com.cqian.mvvm.http.cache;
 
-import com.cqian.app.AppApplication;
 import com.cqian.baselibrary.utils.NetworkUtils;
+import com.cqian.mvvm.BaseApplication;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class CacheInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        boolean netAvailable = NetworkUtils.isNetworkOnline(AppApplication.mAppContext);
+        boolean netAvailable = NetworkUtils.isNetworkOnline(BaseApplication.mAppContext);
 
         if (netAvailable) {
             request = request.newBuilder()

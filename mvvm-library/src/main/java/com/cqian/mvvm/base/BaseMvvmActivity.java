@@ -12,6 +12,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -61,9 +62,8 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         //子类传入layoutResID的布局
         mBindingView = DataBindingUtil.inflate(getLayoutInflater(), layoutResID, null, false);
 
-        // content
-//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        mBindingView.getRoot().setLayoutParams(params);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mBindingView.getRoot().setLayoutParams(params);
         //将子类布局加到base布局中的mContainer
         RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
         mContainer.addView(mBindingView.getRoot());
@@ -72,12 +72,8 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         // 设置透明状态栏，兼容4.4
         //StatusBarUtil.setColor(this, CommonUtils.getColor(R.color.colorTheme), 0);
         setLoading();
-
-        // 加载动画,默认进入页面就开启动画
-        showLoading();
-
+        dismissLoading();
         //setToolBar();
-        mBindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
     }
 
@@ -139,6 +135,21 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         }
         if (mBindingView.getRoot().getVisibility() != View.GONE) {
             mBindingView.getRoot().setVisibility(View.GONE);
+        }
+        if (errorView != null) {
+            errorView.setVisibility(View.GONE);
+        }
+    }
+    protected void dismissLoading() {
+        if (loadingView != null && loadingView.getVisibility() == View.VISIBLE) {
+            loadingView.setVisibility(View.GONE);
+        }
+        // 开始动画
+        if (mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.stop();
+        }
+        if (mBindingView.getRoot().getVisibility() != View.GONE) {
+            mBindingView.getRoot().setVisibility(View.VISIBLE);
         }
         if (errorView != null) {
             errorView.setVisibility(View.GONE);

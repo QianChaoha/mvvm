@@ -1,11 +1,10 @@
-package com.cqian.mvvm.http.cache;
+package com.cqian.mvvm.http;
 
 import android.util.Log;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
-
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -15,11 +14,14 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
 
+public class LogInterceptor implements Interceptor {
 
-public class EnhancedCacheInterceptor implements Interceptor {
+    private static final String TAG = LogInterceptor.class.getSimpleName();
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Charset UTF8 = Charset.forName("UTF-8");
+
         // 打印请求报文
         Request request = chain.request();
         RequestBody requestBody = request.body();
@@ -35,7 +37,7 @@ public class EnhancedCacheInterceptor implements Interceptor {
             }
             reqBody = buffer.readString(charset);
         }
-        Log.e(CacheManager.TAG, String.format("发送请求\nmethod：%s\nurl：%s\nheaders: %s\nbody：%s",
+        Log.d(TAG, String.format("发送请求\nmethod：%s\nurl：%s\nheaders: %s\nbody：%s",
                 request.method(), request.url(), request.headers(), reqBody));
 
         // 打印返回报文
@@ -59,8 +61,8 @@ public class EnhancedCacheInterceptor implements Interceptor {
             }
             respBody = buffer.clone().readString(charset);
         }
-        Log.e(CacheManager.TAG, String.format("收到响应\n%s %s\n请求url：%s\n请求body：%s\n响应body：%s",
+        Log.d(TAG, String.format("收到响应\n%s %s\n请求url：%s\n请求body：%s\n响应body：%s",
                 response.code(), response.message(), response.request().url(), reqBody, respBody));
-        return chain.proceed(request);
+        return response;
     }
 }

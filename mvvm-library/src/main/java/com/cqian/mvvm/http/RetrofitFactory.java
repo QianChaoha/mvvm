@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -23,6 +24,7 @@ public class RetrofitFactory {
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(getClient())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -35,7 +37,7 @@ public class RetrofitFactory {
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.SECONDS)
-                .addInterceptor(new EnhancedCacheInterceptor())
+                .addInterceptor(new EnhancedCacheInterceptor())//缓存
                 .addInterceptor(new Interceptor() {
 
                     @Override
