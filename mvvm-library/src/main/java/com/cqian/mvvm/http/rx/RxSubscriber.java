@@ -77,7 +77,6 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
         } else {
             message = "未知错误";
         }
-        ToastUtils.showToast(BaseApplication.mAppContext,message);
         onFailure(message, code+"");
     }
 

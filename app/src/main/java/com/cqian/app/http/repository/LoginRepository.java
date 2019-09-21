@@ -40,7 +40,7 @@ public class LoginRepository extends BaseRepository {
 
                     @Override
                     public void onFailure(String msg, String code) {
-
+                        data.setValue(new LoginBean());
                     }
                 }));
         return data;
