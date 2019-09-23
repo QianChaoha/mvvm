@@ -1,5 +1,6 @@
 package com.cqian.app.http;
 
+import com.cqian.app.bean.BannerBean;
 import com.cqian.app.bean.LoginBean;
 
 import io.reactivex.Flowable;
@@ -17,4 +18,6 @@ public interface ApiService {
     @POST(HttpUrl.LOGIN)
     @FormUrlEncoded
     Flowable<LoginBean> login(@Field("username") String userName, @Field("password") String passWord);
+    @POST(HttpUrl.BANNER)
+    Flowable<BannerBean> getBanner();
 }

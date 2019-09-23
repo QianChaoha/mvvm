@@ -11,4 +11,6 @@ public class HttpUrl {
     public static final String SERVER_URL = "https://www.wanandroid.com/";
     //登录
     public static final String LOGIN = "user/login";
+    //首页banner
+    public static final String BANNER = "banner/json";
 }
