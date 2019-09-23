@@ -39,6 +39,7 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
     private ActivityBaseBinding mBaseBinding;
     private AnimationDrawable mAnimationDrawable;
     private CompositeDisposable mCompositeDisposable;
+    protected BaseMvvmActivity mActivity;
 
     protected <T extends View> T getView(int id) {
         return (T) findViewById(id);
@@ -48,6 +49,7 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
     protected void onCreate(Bundle savedInstanceState) {
         beforeAddContent();
         super.onCreate(savedInstanceState);
+        mActivity = this;
         afterSuperCreate();
         setContentView(getLayoutId());
         initTitle();
@@ -66,7 +68,7 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         mBindingView.getRoot().setLayoutParams(params);
         //将子类布局加到base布局中的mContainer
         RelativeLayout mContainer = mBaseBinding.getRoot().findViewById(R.id.container);
-        mContainer.addView(mBindingView.getRoot());
+        mContainer.addView(mBindingView.getRoot(),0);
         getWindow().setContentView(mBaseBinding.getRoot());
 
         // 设置透明状态栏，兼容4.4
@@ -133,23 +135,18 @@ public abstract class BaseMvvmActivity<VM extends AndroidViewModel, SV extends V
         if (!mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
-        if (mBindingView.getRoot().getVisibility() != View.GONE) {
-            mBindingView.getRoot().setVisibility(View.GONE);
-        }
         if (errorView != null) {
             errorView.setVisibility(View.GONE);
         }
     }
+
     protected void dismissLoading() {
-        if (loadingView != null && loadingView.getVisibility() == View.VISIBLE) {
-            loadingView.setVisibility(View.GONE);
-        }
-        // 开始动画
+        // 停止动画
         if (mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
-        if (mBindingView.getRoot().getVisibility() != View.GONE) {
-            mBindingView.getRoot().setVisibility(View.VISIBLE);
+        if (loadingView != null && loadingView.getVisibility() == View.VISIBLE) {
+            loadingView.setVisibility(View.GONE);
         }
         if (errorView != null) {
             errorView.setVisibility(View.GONE);

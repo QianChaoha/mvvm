@@ -1,6 +1,7 @@
 package com.cqian.app.bean;
 
-import com.cqian.app.base.BaseBean;
+
+import com.cqian.mvvm.base.BaseBean;
 
 import java.util.List;
 
@@ -8,12 +9,22 @@ public class BannerBean extends BaseBean {
 
     private List<DataBean> data;
 
+    private List<String> imagePathList;
+
     public List<DataBean> getData() {
         return data;
     }
 
     public void setData(List<DataBean> data) {
         this.data = data;
+    }
+
+    public List<String> getImagePathList() {
+        return imagePathList;
+    }
+
+    public void setImagePathList(List<String> imagePathList) {
+        this.imagePathList = imagePathList;
     }
 
     public static class DataBean {

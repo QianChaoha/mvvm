@@ -1,4 +1,6 @@
-package com.cqian.app.base;
+package com.cqian.mvvm.base;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
@@ -16,11 +18,12 @@ public class BaseBean implements Serializable{
      * message : 操作成功!
      */
 
-    public String errcode;
+    public String errorCode;
+    @SerializedName("errorMsg")
     public String msg;
 
     public boolean isSuccess() {
-        return "0".equals(errcode);
+        return "0".equals(errorCode);
     }
 
 }

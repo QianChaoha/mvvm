@@ -2,6 +2,7 @@ package com.cqian.mvvm.http.rx;
 
 
 import com.cqian.mvvm.BaseApplication;
+import com.cqian.mvvm.base.BaseBean;
 import com.cqian.mvvm.http.ServerException;
 import com.cqian.baselibrary.utils.NetworkUtils;
 import com.cqian.baselibrary.utils.ToastUtils;
@@ -9,6 +10,7 @@ import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
 
+import java.lang.reflect.ParameterizedType;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -19,7 +21,7 @@ import retrofit2.HttpException;
 /**
  * @author tqzhang
  */
-public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
+public abstract class RxSubscriber<T extends BaseBean> extends DisposableSubscriber<T> {
 
 
     public RxSubscriber() {
@@ -82,20 +84,22 @@ public abstract class RxSubscriber<T> extends DisposableSubscriber<T> {
 
     @Override
     public void onNext(T t) {
-        onSuccess(t);
+        onCallBack(t);
     }
 
-    /**
-     * success
-     *
-     * @param t
-     */
-    public abstract void onSuccess(T t);
+    public void onFailure(String msg, String code) {
+        Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        try {
+            T t = entityClass.newInstance();
+            t.msg = msg;
+            t.errorCode = code;
+            onCallBack(t);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+    }
 
-    /**
-     * failure
-     *
-     * @param msg
-     */
-    public abstract void onFailure(String msg, String code);
+    public abstract void onCallBack(T t);
 }

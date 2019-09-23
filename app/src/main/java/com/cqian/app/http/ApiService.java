@@ -1,5 +1,6 @@
 package com.cqian.app.http;
 
+import com.cqian.app.bean.ArticleBean;
 import com.cqian.app.bean.BannerBean;
 import com.cqian.app.bean.LoginBean;
 
@@ -20,4 +21,6 @@ public interface ApiService {
     Flowable<LoginBean> login(@Field("username") String userName, @Field("password") String passWord);
     @POST(HttpUrl.BANNER)
     Flowable<BannerBean> getBanner();
+    @POST(HttpUrl.ARTICLE)
+    Flowable<ArticleBean> getArticle();
 }

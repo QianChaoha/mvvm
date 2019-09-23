@@ -1,13 +1,13 @@
 package com.cqian.app.activity;
 
-import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.cqian.app.R;
 import com.cqian.app.bean.LoginBean;
 import com.cqian.app.databinding.ActivityLoginBinding;
+import com.cqian.app.http.HttpObserver;
+import com.cqian.app.utils.ErrorLogUtils;
 import com.cqian.app.viewmodel.LoginViewModel;
 import com.cqian.baselibrary.utils.ToastUtils;
 import com.cqian.mvvm.base.BaseMvvmActivity;
@@ -50,11 +50,23 @@ public class LoginActivity extends BaseMvvmActivity<LoginViewModel, ActivityLogi
             ToastUtils.showToast(getApplication(), "请输入密码");
             return;
         }
-        mViewModel.login(userName, password).observe(this, new Observer<LoginBean>() {
+        showLoading();
+        mViewModel.login(userName, password).observe(this, new HttpObserver<LoginBean>() {
             @Override
-            public void onChanged(@Nullable LoginBean loginBean) {
+            public void onSuccess(LoginBean data) {
 
             }
+
+            @Override
+            public void onFailed(String errCode, String msg) {
+                ErrorLogUtils.showError(mActivity, msg, errCode);
+            }
+
+            @Override
+            public void finishRefresh() {
+                dismissLoading();
+            }
+
         });
     }
 }

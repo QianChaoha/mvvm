@@ -24,25 +24,14 @@ public class LoginRepository extends BaseRepository {
 
     public MutableLiveData<LoginBean> login(String userName, String passWord) {
         final MutableLiveData<LoginBean> data = new MutableLiveData<>();
-        addDisposable(mApiService.login(userName, passWord)
+        mApiService.login(userName, passWord)
                 .compose(RxSchedulers.ioToMain())
                 .subscribeWith(new RxSubscriber<LoginBean>() {
-
                     @Override
-                    protected void onNoNetWork() {
-                        super.onNoNetWork();
+                    public void onCallBack(LoginBean loginBean) {
+                        data.setValue(loginBean);
                     }
-
-                    @Override
-                    public void onSuccess(LoginBean worksListVo) {
-                        data.setValue(worksListVo);
-                    }
-
-                    @Override
-                    public void onFailure(String msg, String code) {
-                        data.setValue(new LoginBean());
-                    }
-                }));
+                });
         return data;
     }
 

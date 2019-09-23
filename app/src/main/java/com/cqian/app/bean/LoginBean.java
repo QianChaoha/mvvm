@@ -1,6 +1,8 @@
 package com.cqian.app.bean;
 
-import com.cqian.app.base.BaseBean;
+import com.cqian.mvvm.base.BaseBean;
+
+import java.util.List;
 
 /**
  * Description:
@@ -10,16 +12,19 @@ import com.cqian.app.base.BaseBean;
  */
 public class LoginBean  extends BaseBean{
 
-    /**
-     * data : {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTM2MTEzMDQ5fQ.7_9UrFVRDQEfxmHQfc7L8w1jwbcLHoZOGF7UkuUGfCA"}
-     */
-
     public DataBean data;
-
-    public class DataBean {
-        /**
-         * token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZXhwIjoxNTM2MTEzMDQ5fQ.7_9UrFVRDQEfxmHQfc7L8w1jwbcLHoZOGF7UkuUGfCA
-         */
+    public static class DataBean {
+        public boolean admin;
+        public String email;
+        public String icon;
+        public int id;
+        public String nickname;
+        public String password;
+        public String publicName;
         public String token;
+        public int type;
+        public String username;
+        public List<?> chapterTops;
+        public List<?> collectIds;
     }
 }
