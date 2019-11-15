@@ -6,7 +6,7 @@ import com.cqian.app.databinding.ActivityMainBinding;
 import com.cqian.app.http.HttpObserver;
 import com.cqian.app.utils.ErrorLogUtils;
 import com.cqian.app.utils.GlideImageLoader;
-import com.cqian.app.viewmodel.MainViewModel;
+import com.cqian.app.viewmodel.main.MainViewModel;
 import com.cqian.mvvm.base.BaseMvvmActivity;
 
 /**

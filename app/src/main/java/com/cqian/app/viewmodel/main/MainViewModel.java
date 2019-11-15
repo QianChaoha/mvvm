@@ -1,12 +1,10 @@
-package com.cqian.app.viewmodel;
+package com.cqian.app.viewmodel.main;
 
 import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.cqian.app.bean.BannerBean;
-import com.cqian.app.bean.LoginBean;
-import com.cqian.app.http.repository.LoginRepository;
 import com.cqian.app.http.repository.MainRepository;
 import com.cqian.mvvm.base.BaseViewModel;
 

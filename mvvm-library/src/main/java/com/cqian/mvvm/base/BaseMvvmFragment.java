@@ -47,15 +47,18 @@ public abstract class BaseMvvmFragment<VM extends AndroidViewModel, SV extends V
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.fragment_base, null);
         //实例化子类布局
-        mBindingView = DataBindingUtil.inflate(mActivity.getLayoutInflater(), setContent(), null, false);
+        mBindingView = DataBindingUtil.inflate(mActivity.getLayoutInflater(), setContentId(), null, false);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mBindingView.getRoot().setLayoutParams(params);
 
         //将子类布局加到base布局的contain下
         RelativeLayout mContainer = inflate.findViewById(R.id.container);
         mContainer.addView(mBindingView.getRoot());
+        initView(inflate, savedInstanceState);
+        initData();
         return inflate;
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -71,6 +74,7 @@ public abstract class BaseMvvmFragment<VM extends AndroidViewModel, SV extends V
         mBindingView.getRoot().setVisibility(View.GONE);
         initViewModel();
     }
+
     /**
      * 初始化ViewModel
      */
@@ -80,6 +84,7 @@ public abstract class BaseMvvmFragment<VM extends AndroidViewModel, SV extends V
             this.mViewModel = ViewModelProviders.of(this).get(viewModelClass);
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -97,5 +102,18 @@ public abstract class BaseMvvmFragment<VM extends AndroidViewModel, SV extends V
     /**
      * 布局
      */
-    public abstract int setContent();
+    public abstract int setContentId();
+
+    /**
+     * 该抽象方法就是 初始化view
+     *
+     * @param view
+     * @param savedInstanceState
+     */
+    protected abstract void initView(View view, Bundle savedInstanceState);
+
+    /**
+     * 执行数据的加载
+     */
+    public abstract void initData();
 }
